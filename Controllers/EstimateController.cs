@@ -58,7 +58,7 @@ public class EstimateController : ControllerBase
     {
         throw new NotImplementedException();
     }
-
+//TODO: move getestimation to some command
     [Authorize]
     [HttpGet]
     public async Task<ICollection<EstimationResultDto>> GetUsersEstimations(int startingId = -1, int resultsPerPage = 10)
