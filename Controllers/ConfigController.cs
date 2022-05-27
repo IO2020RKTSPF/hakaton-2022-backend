@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace hakaton_2022_backend.Controllers;
 
-[Authorize]
+[Authorize(Roles = "Owner")]
 [ApiController]
 [Route("api/config")]
 public class ConfigController : ControllerBase
