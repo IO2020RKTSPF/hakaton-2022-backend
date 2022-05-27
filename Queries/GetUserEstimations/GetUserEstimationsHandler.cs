@@ -16,6 +16,16 @@ public class GetUserEstimationsHandler : IRequestHandler<GetUserEstimationsQuery
     public async Task<ICollection<Estimation>> Handle(GetUserEstimationsQuery request, CancellationToken cancellationToken)
     {
         var estimations = await _estimationRepository.GetEstimationsForUser(request.UserId);
+        if (request.StartingId != -1)
+        {
+            estimations = estimations.SkipWhile(x => x.Id != request.StartingId).ToList();
+        }
+
+        if (estimations.Count > request.ResultsPerPage)
+        {
+            estimations = estimations.Take(request.ResultsPerPage).ToList();
+        }
+        
         return estimations;
     }
 }
