@@ -7,5 +7,5 @@ public class User
     public string Password { get; set; }
     public string Email { get; set; }
     public ICollection<Estimation> Estimations { get; set; }
-    public Enterprise Enterprise { get; set; }
+    public Enterprise? Enterprise { get; set; }
 }
