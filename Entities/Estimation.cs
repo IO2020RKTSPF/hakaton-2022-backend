@@ -5,4 +5,5 @@ public class Estimation
     public int Id { get; set; }
     public Config Config { get; set; }
     public int Result { get; set; }
+    public User User { get; set; }
 }
