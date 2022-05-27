@@ -25,8 +25,8 @@ public class JwtTokenFactory : IJwtFactory
         
         var claims = new List<Claim>
         {
-            new Claim(ClaimTypes.Name, user.Username),
-            new Claim(ClaimTypes.Role, _enterpriseRepository.IsUserEnterpriseOwner(user.Id, user.Enterprise.Id))
+            new Claim("Id", user.Id.ToString()),
+            new Claim(ClaimTypes.Role, _enterpriseRepository.IsUserEnterpriseOwner(user.Id, user.Enterprise.Id) ? "Owner" : "User")
         };
         var token = new JwtSecurityToken(
             _configuration["jwtIssuer"],
