@@ -2,6 +2,7 @@ namespace hakaton_2022_backend.Entities;
 
 public class Config
 {
+    public int Id { get; set; }
     public int MinutesPerLines { get; set; }
     public int MinutesPerCodeFamiliarity { get; set; }
     public int MinutesPerExperience { get; set; }

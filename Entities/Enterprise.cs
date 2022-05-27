@@ -2,6 +2,7 @@ namespace hakaton_2022_backend.Entities;
 
 public class Enterprise
 {
+    public int Id { get; set; }
     public string Name { get; set; }
     public User Admin { get; set; }
     public ICollection<User> Users { get; set; }
