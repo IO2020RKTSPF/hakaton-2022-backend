@@ -1,4 +1,4 @@
-namespace hakaton_2022_backend.DTOs;
+namespace hakaton_2022_backend.DTOs.Config;
 
 public class GetConfigDto
 {

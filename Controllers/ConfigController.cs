@@ -1,4 +1,5 @@
 using hakaton_2022_backend.DTOs;
+using hakaton_2022_backend.DTOs.Config;
 using Microsoft.AspNetCore.Mvc;
 
 namespace hakaton_2022_backend.Controllers;
