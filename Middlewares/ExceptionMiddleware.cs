@@ -15,6 +15,8 @@ public class ExceptionMiddleware : IMiddleware
             Console.WriteLine(e);
             if (e is ApiException apiException)
                 context.Response.StatusCode = apiException.StatusCode;
+            else
+                context.Response.StatusCode = StatusCodes.Status500InternalServerError;
         }
     }
 }
