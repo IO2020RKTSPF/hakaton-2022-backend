@@ -12,18 +12,20 @@ public class RegisterHandler : IRequestHandler<RegisterCommand, RegisterResponse
     private readonly IUserRepository _userRepository;
     private readonly IEnterpriseRepository _enterpriseRepository;
     private readonly IMediator _mediator;
+    private readonly IConfigRepository _configRepository;
 
-    public RegisterHandler(IUserRepository userRepository, IEnterpriseRepository enterpriseRepository, IMediator mediator)
+    public RegisterHandler(IUserRepository userRepository, IEnterpriseRepository enterpriseRepository, IMediator mediator, IConfigRepository configRepository)
     {
         _userRepository = userRepository;
         _enterpriseRepository = enterpriseRepository;
         _mediator = mediator;
+        _configRepository = configRepository;
     }
     public async Task<RegisterResponseDto> Handle(RegisterCommand request, CancellationToken cancellationToken)
     {
         if (await _enterpriseRepository.ExistsByName(request.OrganizationName))
             throw new EnterpriseAlreadyExistsException();
-
+        //TODO: HASH PASSWORD
         var user = await _userRepository.GetByPredicate(x => x.Email == request.Email | x.Username == request.Username);
         if (user is not null)
             throw new UserAlreadyExistsException();
@@ -44,6 +46,16 @@ public class RegisterHandler : IRequestHandler<RegisterCommand, RegisterResponse
             Name = request.OrganizationName,
             Users = new List<User>(){addResponse}
         };
+
+        //TODO: SET DEFAULT VALUES
+        var config = new Config()
+        {
+            Enterprise = enterprise
+        };
+
+        var addedConfig = await _configRepository.AddConfig(config);
+        if (addedConfig is null)
+            throw new DbException();
 
         var enterpriseResponse = await _enterpriseRepository.CreateEnterprise(enterprise);
         if (enterpriseResponse is null)
