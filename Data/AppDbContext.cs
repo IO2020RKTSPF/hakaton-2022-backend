@@ -10,6 +10,7 @@ public class AppDbContext : DbContext
     public virtual DbSet<Config> Configs { get; set; }
     public virtual DbSet<Enterprise> Enterprises { get; set; }
     public virtual DbSet<Estimation> Estimations { get; set; }
+    public virtual DbSet<Parameters> Parameters { get; set; }
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
     }
@@ -20,6 +21,7 @@ public class AppDbContext : DbContext
         modelBuilder.ApplyConfiguration(new EnterpriseConfiguration());
         modelBuilder.ApplyConfiguration(new EstimationConfiguration());
         modelBuilder.ApplyConfiguration(new UserConfiguration());
+        modelBuilder.ApplyConfiguration(new ParametersConfiguration());
     }
     
 }

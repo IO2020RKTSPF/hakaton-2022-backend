@@ -98,7 +98,7 @@ namespace hakaton_2022_backend.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ConfigId")
+                    b.Property<int>("ParametersId")
                         .HasColumnType("integer");
 
                     b.Property<int>("Result")
@@ -113,11 +113,53 @@ namespace hakaton_2022_backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ConfigId");
+                    b.HasIndex("ParametersId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("estimations", (string)null);
+                });
+
+            modelBuilder.Entity("hakaton_2022_backend.Entities.Parameters", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CodeFamiliarity")
+                        .HasColumnType("integer")
+                        .HasColumnName("code_familiarity");
+
+                    b.Property<int>("DesiredCodeQuality")
+                        .HasColumnType("integer")
+                        .HasColumnName("desired_code_quality");
+
+                    b.Property<int>("ExperienceLevel")
+                        .HasColumnType("integer")
+                        .HasColumnName("experience_level");
+
+                    b.Property<int>("LinesOfCode")
+                        .HasColumnType("integer")
+                        .HasColumnName("lines_of_code");
+
+                    b.Property<int>("ProjectScale")
+                        .HasColumnType("integer")
+                        .HasColumnName("project_scale");
+
+                    b.Property<int>("TaskKnowledge")
+                        .HasColumnType("integer")
+                        .HasColumnName("task_knowledge");
+
+                    b.Property<bool>("UseAi")
+                        .HasColumnType("boolean")
+                        .HasColumnName("use_ai");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("parameters", (string)null);
                 });
 
             modelBuilder.Entity("hakaton_2022_backend.Entities.User", b =>
@@ -178,9 +220,9 @@ namespace hakaton_2022_backend.Migrations
 
             modelBuilder.Entity("hakaton_2022_backend.Entities.Estimation", b =>
                 {
-                    b.HasOne("hakaton_2022_backend.Entities.Config", "Config")
+                    b.HasOne("hakaton_2022_backend.Entities.Parameters", "Parameters")
                         .WithMany()
-                        .HasForeignKey("ConfigId")
+                        .HasForeignKey("ParametersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -190,7 +232,7 @@ namespace hakaton_2022_backend.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Config");
+                    b.Navigation("Parameters");
 
                     b.Navigation("User");
                 });
