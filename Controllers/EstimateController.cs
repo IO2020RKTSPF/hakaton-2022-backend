@@ -61,12 +61,14 @@ public class EstimateController : ControllerBase
 
     [Authorize]
     [HttpGet]
-    public async Task<ICollection<EstimationResultDto>> GetUsersEstimations()
+    public async Task<ICollection<EstimationResultDto>> GetUsersEstimations(int startingId = -1, int resultsPerPage = 10)
     {
         var userId = Int32.Parse(User.Claims.First(p => p.Type == "Id").Value);
         var request = new GetUserEstimationsQuery()
         {
-            UserId = userId
+            UserId = userId,
+            StartingId = startingId,
+            ResultsPerPage = resultsPerPage
         };
 
         var result = await _mediator.Send(request);
