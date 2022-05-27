@@ -18,7 +18,7 @@ public class GetUserEstimationsHandler : IRequestHandler<GetUserEstimationsQuery
         var estimations = await _estimationRepository.GetEstimationsForUser(request.UserId);
         if (request.StartingId != -1)
         {
-            estimations = estimations.SkipWhile(x => x.Id != request.StartingId).ToList();
+            estimations = estimations.SkipWhile(x => x.Id != request.StartingId).Skip(1).ToList();
         }
 
         if (estimations.Count > request.ResultsPerPage)
