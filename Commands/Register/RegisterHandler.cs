@@ -25,7 +25,7 @@ public class RegisterHandler : IRequestHandler<RegisterCommand, RegisterResponse
     {
         if (await _enterpriseRepository.ExistsByName(request.OrganizationName))
             throw new EnterpriseAlreadyExistsException();
-
+        //TODO: HASH PASSWORD
         var user = await _userRepository.GetByPredicate(x => x.Email == request.Email | x.Username == request.Username);
         if (user is not null)
             throw new UserAlreadyExistsException();
