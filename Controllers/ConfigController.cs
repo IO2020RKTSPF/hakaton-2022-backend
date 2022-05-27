@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace hakaton_2022_backend.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/config")]
 public class ConfigController : ControllerBase
 {
     //TODO:get user org from jwt claim

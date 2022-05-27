@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace hakaton_2022_backend.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/auth")]
 public class AuthController
 {
     [HttpPost]
