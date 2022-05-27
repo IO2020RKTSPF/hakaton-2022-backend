@@ -27,6 +27,6 @@ public class AuthController : ControllerBase
     [Route("register")]
     public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
     {
-        return Ok(await _mediator.Send(new RegisterCommand(registerDto.OrganizationName,registerDto.Username, registerDto.Password)));
+        return Ok(await _mediator.Send(new RegisterCommand(registerDto.OrganizationName,registerDto.Username, registerDto.Password, registerDto.Email)));
     }
 }
