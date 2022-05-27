@@ -32,10 +32,21 @@ public class RegisterHandler : IRequestHandler<RegisterCommand, RegisterResponse
         {
             Email = request.Email,
             Password = request.Password,
-            Username = request.Username
+            Username = request.Username,
         };
         var addResponse = await _userRepository.AddUser(newUser);
         if (addResponse is null)
+            throw new DbException();
+
+        var enterprise = new Enterprise()
+        {
+            Admin = addResponse,
+            Name = request.OrganizationName,
+            Users = new List<User>(){addResponse}
+        };
+
+        var enterpriseResponse = await _enterpriseRepository.CreateEnterprise(enterprise);
+        if (enterpriseResponse is null)
             throw new DbException();
 
         var token = await _mediator.Send(new LoginCommand(request.Username, request.Password));

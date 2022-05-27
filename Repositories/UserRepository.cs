@@ -20,12 +20,12 @@ public class UserRepository : Repository<User>, IUserRepository
 
     public new async Task<ICollection<User>> GetAll()
     {
-        return await base.GetAll().ToListAsync();
+        return await base.GetAll().Include(x=>x.Enterprise).ToListAsync();
     }
 
     public async Task<User?> GetUserById(int id)
     {
-        return await base.GetAll().FirstOrDefaultAsync(x => x.Id == id);
+        return await base.GetAll().Include(x=>x.Enterprise).FirstOrDefaultAsync(x => x.Id == id);
     }
 
     public async Task<User?> AddUser(User user)
@@ -35,6 +35,6 @@ public class UserRepository : Repository<User>, IUserRepository
 
     public async Task<User?> GetByPredicate(Expression<Func<User, bool>> predicate)
     {
-        return await base.GetAll().FirstOrDefaultAsync(predicate);
+        return await base.GetAll().Include(x=>x.Enterprise).FirstOrDefaultAsync(predicate);
     }
 }
