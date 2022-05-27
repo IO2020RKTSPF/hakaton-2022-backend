@@ -57,10 +57,6 @@ public class RegisterHandler : IRequestHandler<RegisterCommand, RegisterResponse
         if (addedConfig is null)
             throw new DbException();
 
-        var enterpriseResponse = await _enterpriseRepository.CreateEnterprise(enterprise);
-        if (enterpriseResponse is null)
-            throw new DbException();
-
         var token = await _mediator.Send(new LoginCommand(request.Username, request.Password));
 
         return new RegisterResponseDto() {Token = token.Token};
