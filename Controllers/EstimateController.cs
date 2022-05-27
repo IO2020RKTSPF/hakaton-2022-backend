@@ -2,6 +2,7 @@ using AutoMapper;
 using hakaton_2022_backend.Commands.UpdateEstimation;
 using hakaton_2022_backend.DTOs.Estimate;
 using hakaton_2022_backend.Queries.GetEstimation;
+using hakaton_2022_backend.Queries.GetUserEstimations;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -56,5 +57,20 @@ public class EstimateController : ControllerBase
     public Task<IActionResult> GetEstimationByDescription([FromBody] string description)
     {
         throw new NotImplementedException();
+    }
+
+    [Authorize]
+    [HttpGet]
+    public async Task<ICollection<EstimationResultDto>> GetUsersEstimations()
+    {
+        var userId = Int32.Parse(User.Claims.First(p => p.Type == "Id").Value);
+        var request = new GetUserEstimationsQuery()
+        {
+            UserId = userId
+        };
+
+        var result = await _mediator.Send(request);
+        return _mapper.Map<ICollection<EstimationResultDto>>(result);
+
     }
 }

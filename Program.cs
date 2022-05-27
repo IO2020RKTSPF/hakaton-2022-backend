@@ -71,6 +71,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IEnterpriseRepository, EnterpriseRepository>();
 builder.Services.AddScoped<IEstimationRepository, EstimationRepository>();
 builder.Services.AddScoped<IConfigRepository, ConfigRepository>();
+builder.Services.AddScoped<IParametersRepository, ParametersRepository>();
 builder.Services.AddScoped<IJwtFactory, JwtTokenFactory>();
 builder.Services.AddTransient<ExceptionMiddleware>();
 
