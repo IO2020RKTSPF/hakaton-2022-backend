@@ -44,11 +44,21 @@ public class GetEstimationHandler : IRequestHandler<GetEstimationQuery, Estimati
         var estimation = new Estimation()
         {
             Parameters = paramsDb,
-            Result = 555,
+            Result = CalculateEstimation(config, parameters),
             User = user
         };
         var result = await _estimationRepository.AddEstimation(estimation);
         return result;
 
+    }
+
+    private int CalculateEstimation(Config config, Parameters parameters)
+    {
+        return (config.MinutesQuality * parameters.DesiredCodeQuality) +
+               (config.MinutesPerExperience * parameters.ExperienceLevel) +
+               (config.MinutesPerLines * parameters.LinesOfCode) +
+               (config.MinutesPerCodeFamiliarity * parameters.CodeFamiliarity) +
+               (config.MinutesPerProjectScale * parameters.ProjectScale) +
+               (config.MinutesPerTaskKnowledge * parameters.TaskKnowledge);
     }
 }
