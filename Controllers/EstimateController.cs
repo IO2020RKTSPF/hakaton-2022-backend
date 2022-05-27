@@ -1,4 +1,5 @@
 using AutoMapper;
+using hakaton_2022_backend.Commands.UpdateEstimation;
 using hakaton_2022_backend.DTOs.Estimate;
 using hakaton_2022_backend.Queries.GetEstimation;
 using MediatR;
@@ -18,6 +19,15 @@ public class EstimateController : ControllerBase
     {
         _mediator = mediator;
         _mapper = mapper;
+    }
+
+    [HttpPut]
+    public async Task<IActionResult> UpdateEstimation([FromBody] UpdateEstimationDto updateEstimationDto)
+    {
+        var updatedEstimation = await _mediator.Send(new UpdateEstimationCommand()
+            {Id = updateEstimationDto.EstimationId, ActualValue = updateEstimationDto.ActualValue});
+
+        return Ok(updatedEstimation);
     }
 
     [Authorize]
