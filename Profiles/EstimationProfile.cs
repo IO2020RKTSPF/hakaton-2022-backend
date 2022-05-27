@@ -8,6 +8,6 @@ public class EstimationProfile : Profile
 {
     public EstimationProfile()
     {
-        CreateMap<Estimation, EstimationResultDto>();
+        CreateMap<Estimation, EstimationResultDto>().ReverseMap();
     }
 }

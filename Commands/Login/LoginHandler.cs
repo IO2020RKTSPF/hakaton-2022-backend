@@ -20,7 +20,7 @@ public class LoginHandler : IRequestHandler<LoginCommand, LoginResponseDto>
     public async Task<LoginResponseDto> Handle(LoginCommand request, CancellationToken cancellationToken)
     {
         var user = await _userRepository.GetByPredicate(x =>
-            x.Username == request.Username || request.Password == x.Password);
+            x.Username == request.Username && request.Password == x.Password);
         if (user is null)
             throw new IncorrentCredentialsException();
 

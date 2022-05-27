@@ -21,10 +21,10 @@ public class EstimateController : ControllerBase
     }
 
     [Authorize]
-    [HttpGet]
+    [HttpPost]
     public async Task<IActionResult> GetEstimation([FromBody] GetEstimationDto estimationDto)
     {
-        var userId = Int32.Parse(User.Claims.First(p => p.Type == "id").Value);
+        var userId = Int32.Parse(User.Claims.First(p => p.Type == "Id").Value);
         var request = new GetEstimationQuery()
         {
             UserId = userId,
@@ -38,7 +38,7 @@ public class EstimateController : ControllerBase
         };
 
         var result = await _mediator.Send(request);
-        return Ok(_mapper.Map<EstimationResultDto>(request));
+        return Ok(_mapper.Map<EstimationResultDto>(result));
     }
 
     [HttpGet]
