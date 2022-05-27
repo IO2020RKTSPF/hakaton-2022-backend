@@ -21,7 +21,7 @@ public class RegisterHandler : IRequestHandler<RegisterCommand, RegisterResponse
     }
     public async Task<RegisterResponseDto> Handle(RegisterCommand request, CancellationToken cancellationToken)
     {
-        if (_enterpriseRepository.ExistsByName(request.OrganizationName))
+        if (await _enterpriseRepository.ExistsByName(request.OrganizationName))
             throw new EnterpriseAlreadyExistsException();
         
         var user = await _userRepository.GetByPredicate(x => x.Email == request.Email | x.Username == request.Username);

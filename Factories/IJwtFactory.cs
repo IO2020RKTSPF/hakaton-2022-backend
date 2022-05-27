@@ -4,5 +4,5 @@ namespace hakaton_2022_backend.Factories;
 
 public interface IJwtFactory
 {
-    string Generate(User user);
+    Task<string> Generate(User user);
 }

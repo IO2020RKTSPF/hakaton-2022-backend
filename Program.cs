@@ -1,7 +1,10 @@
 using System.Text;
+using BitadAPI.Repositories;
 using hakaton_2022_backend.Data;
+using hakaton_2022_backend.Factories;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 
@@ -34,6 +37,11 @@ builder.Services.AddAuthentication(x =>
     };
 });
 builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IEnterpriseRepository, EnterpriseRepository>();
+builder.Services.AddScoped<IEstimationRepository, EstimationRepository>();
+builder.Services.AddScoped<IConfigRepository, ConfigRepository>();
+builder.Services.AddScoped<IJwtFactory, JwtTokenFactory>();
 
 var app = builder.Build();
 
