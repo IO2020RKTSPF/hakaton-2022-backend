@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "d7WyYKQdr5xI6tgbfViY+aiqIKa821Xr6+dgY0gEoaSHwGWaTxyiPe/vG7EYgUgHz21sAXE4lOkQpJ9ohX2SKA==",
+  "success": true,
+  "projectFilePath": "/Users/rtry/Projects/hakaton-2022-backend/hakaton-2022-backend.csproj",
+  "expectedPackageFiles": [
+    "/Users/rtry/.nuget/packages/microsoft.extensions.apidescription.server/3.0.0/microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "/Users/rtry/.nuget/packages/microsoft.openapi/1.2.3/microsoft.openapi.1.2.3.nupkg.sha512",
+    "/Users/rtry/.nuget/packages/swashbuckle.aspnetcore/6.2.3/swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "/Users/rtry/.nuget/packages/swashbuckle.aspnetcore.swagger/6.2.3/swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "/Users/rtry/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.2.3/swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "/Users/rtry/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.2.3/swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}
