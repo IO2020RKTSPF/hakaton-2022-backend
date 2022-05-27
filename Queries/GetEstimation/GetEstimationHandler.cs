@@ -29,7 +29,7 @@ public class GetEstimationHandler : IRequestHandler<GetEstimationQuery, Estimati
         //later do some calculations for that
         var estimation = new Estimation()
         {
-            Config = enterprise.Config,
+            Config = config,
             Result = 555,
             User = user
         };
