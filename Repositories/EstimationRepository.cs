@@ -17,7 +17,7 @@ public class EstimationRepository : Repository<Estimation>, IEstimationRepositor
     public EstimationRepository(AppDbContext context) : base(context) { }
     public async Task<Estimation?> GetEstimation(int id)
     {
-        return await base.GetAll().FirstOrDefaultAsync(x => x.Id == id);
+        return await base.GetAll().Include(x => x.Parameters).FirstOrDefaultAsync(x => x.Id == id);
     }
 
     public async Task<Estimation?> AddEstimation(Estimation estimation)
@@ -27,7 +27,7 @@ public class EstimationRepository : Repository<Estimation>, IEstimationRepositor
 
     public async Task<ICollection<Estimation>> GetEstimationsForUser(int userId)
     {
-        return await GetAll().Where(x => x.User.Id == userId).ToListAsync();
+        return await GetAll().Include(x => x.Parameters).Where(x => x.User.Id == userId).ToListAsync();
     }
 
     public async Task<Estimation?> UpdateEstimation(Estimation estimation)

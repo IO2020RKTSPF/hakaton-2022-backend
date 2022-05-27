@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using hakaton_2022_backend.Data;
@@ -11,9 +12,10 @@ using hakaton_2022_backend.Data;
 namespace hakaton_2022_backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220527222211_userResult")]
+    partial class userResult
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -98,7 +100,7 @@ namespace hakaton_2022_backend.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ParametersId")
+                    b.Property<int>("ConfigId")
                         .HasColumnType("integer");
 
                     b.Property<int>("Result")
@@ -113,53 +115,11 @@ namespace hakaton_2022_backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ParametersId");
+                    b.HasIndex("ConfigId");
 
                     b.HasIndex("UserId");
 
                     b.ToTable("estimations", (string)null);
-                });
-
-            modelBuilder.Entity("hakaton_2022_backend.Entities.Parameters", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CodeFamiliarity")
-                        .HasColumnType("integer")
-                        .HasColumnName("code_familiarity");
-
-                    b.Property<int>("DesiredCodeQuality")
-                        .HasColumnType("integer")
-                        .HasColumnName("desired_code_quality");
-
-                    b.Property<int>("ExperienceLevel")
-                        .HasColumnType("integer")
-                        .HasColumnName("experience_level");
-
-                    b.Property<int>("LinesOfCode")
-                        .HasColumnType("integer")
-                        .HasColumnName("lines_of_code");
-
-                    b.Property<int>("ProjectScale")
-                        .HasColumnType("integer")
-                        .HasColumnName("project_scale");
-
-                    b.Property<int>("TaskKnowledge")
-                        .HasColumnType("integer")
-                        .HasColumnName("task_knowledge");
-
-                    b.Property<bool>("UseAi")
-                        .HasColumnType("boolean")
-                        .HasColumnName("use_ai");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("parameters", (string)null);
                 });
 
             modelBuilder.Entity("hakaton_2022_backend.Entities.User", b =>
@@ -220,9 +180,9 @@ namespace hakaton_2022_backend.Migrations
 
             modelBuilder.Entity("hakaton_2022_backend.Entities.Estimation", b =>
                 {
-                    b.HasOne("hakaton_2022_backend.Entities.Parameters", "Parameters")
+                    b.HasOne("hakaton_2022_backend.Entities.Config", "Config")
                         .WithMany()
-                        .HasForeignKey("ParametersId")
+                        .HasForeignKey("ConfigId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -232,7 +192,7 @@ namespace hakaton_2022_backend.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Parameters");
+                    b.Navigation("Config");
 
                     b.Navigation("User");
                 });
