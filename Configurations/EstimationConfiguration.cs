@@ -11,6 +11,7 @@ public class EstimationConfiguration : IEntityTypeConfiguration<Estimation>
         builder.ToTable("estimations").HasKey(x => x.Id);
 
         builder.HasOne(x => x.Config);
+        builder.HasOne(x => x.User);
         
         builder.Property(x => x.Id)
             .HasColumnName("id")

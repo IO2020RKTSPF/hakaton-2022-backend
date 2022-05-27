@@ -12,7 +12,9 @@ public class EnterpriseConfiguration : IEntityTypeConfiguration<Enterprise>
 
         builder.HasOne(x => x.Admin);
 
-        builder.HasOne(x => x.Config);
+        builder.HasOne(x => x.Config)
+            .WithOne(x => x.Enterprise)
+            .HasForeignKey<Config>(x => x.EnterpriseId);
         
         builder.Property(x => x.Name)
             .HasColumnName("name")
