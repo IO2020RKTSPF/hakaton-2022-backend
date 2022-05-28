@@ -23,10 +23,12 @@ public class EstimationMachineLearningService : IEstimationMachineLearningServic
         MLContext mlContext = new MLContext();
         
         // STEP 1: Common data loading configuration
-        var estimations = (await _estimationRepository.GetAllEstimations()).Take(5);
+        var allEstimations = (await _estimationRepository.GetAllEstimations()).ToList();
+        var count = allEstimations.Count;
+        var estimations = allEstimations.Take((int) (count*(8.0/10.0)));
         var estimationModels1 = _mapper.Map<IEnumerable<EstimationModel>>(estimations);
         IDataView baseTrainingDataView = mlContext.Data.LoadFromEnumerable<EstimationModel>(estimationModels1);
-        IDataView testDataView = mlContext.Data.LoadFromEnumerable<EstimationModel>(_mapper.Map<IEnumerable<EstimationModel>>((await _estimationRepository.GetAllEstimations()).Skip(5).Take(2)));
+        IDataView testDataView = mlContext.Data.LoadFromEnumerable<EstimationModel>(_mapper.Map<IEnumerable<EstimationModel>>(allEstimations.Skip((int) (count*(8.0/10.0))).Take((int) (count*(2.0/10.0)))));
 
         //Sample code of removing extreme data like "outliers" for FareAmounts higher than $150 and lower than $1 which can be error-data 
         var cnt = baseTrainingDataView.GetColumn<float>(nameof(EstimationModel.UserResult)).Count();

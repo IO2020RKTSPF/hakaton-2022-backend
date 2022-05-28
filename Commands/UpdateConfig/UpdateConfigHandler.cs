@@ -28,6 +28,13 @@ public class UpdateConfigHandler : IRequestHandler<UpdateConfigCommand, GetConfi
         if (config is null)
             throw new DbException();
 
+        config.MinutesQuality = request.MinutesQuality;
+        config.MinutesPerExperience = request.MinutesPerExperience;
+        config.MinutesPerLines = request.MinutesPerLines;
+        config.MinutesPerCodeFamiliarity = request.MinutesPerCodeFamiliarity;
+        config.MinutesPerProjectScale = request.MinutesPerProjectScale;
+        config.MinutesPerTaskKnowledge = request.MinutesPerTaskKnowledge;
+
         var updatedConfig = await _configRepository.UpdateConfig(config);
         if (updatedConfig is null)
             throw new DbException();

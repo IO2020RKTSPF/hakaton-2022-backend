@@ -64,10 +64,10 @@ public class GetEstimationHandler : IRequestHandler<GetEstimationQuery, Estimati
         if (parameters.UseAi)
             return await _estimationMachineLearningService.Calculate(_mapper.Map<EstimationModel>(parameters));
         return (config.MinutesQuality * parameters.DesiredCodeQuality) +
-               (config.MinutesPerExperience * parameters.ExperienceLevel) +
+               (config.MinutesPerExperience * (1/parameters.ExperienceLevel)) +
                (config.MinutesPerLines * parameters.LinesOfCode) +
-               (config.MinutesPerCodeFamiliarity * parameters.CodeFamiliarity) +
+               (config.MinutesPerCodeFamiliarity * (1/parameters.CodeFamiliarity)) +
                (config.MinutesPerProjectScale * parameters.ProjectScale) +
-               (config.MinutesPerTaskKnowledge * parameters.TaskKnowledge);
+               (config.MinutesPerTaskKnowledge * (1/parameters.TaskKnowledge));
     }
 }
