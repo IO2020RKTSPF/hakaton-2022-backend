@@ -45,7 +45,8 @@ public class EstimateController : ControllerBase
             LinesOfCode = estimationDto.Lines,
             ProjectScale = estimationDto.ProjectScale,
             TaskKnowledge = estimationDto.TaskKnowledge,
-            UseAi = estimationDto.UseAi
+            UseAi = estimationDto.UseAi,
+            Name = String.IsNullOrWhiteSpace(estimationDto.Name) ? Guid.NewGuid().ToString().Substring(6) : estimationDto.Name
         };
 
         var result = await _mediator.Send(request);
