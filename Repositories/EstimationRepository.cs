@@ -10,6 +10,7 @@ public interface IEstimationRepository
     public Task<Estimation?> AddEstimation(Estimation estimation);
     public Task<ICollection<Estimation>> GetEstimationsForUser(int userId);
     public Task<Estimation?> UpdateEstimation(Estimation estimation);
+    public Task<IEnumerable<Estimation>> GetAllEstimations();
 }
 
 public class EstimationRepository : Repository<Estimation>, IEstimationRepository
@@ -27,11 +28,16 @@ public class EstimationRepository : Repository<Estimation>, IEstimationRepositor
 
     public async Task<ICollection<Estimation>> GetEstimationsForUser(int userId)
     {
-        return await GetAll().Include(x => x.Parameters).Where(x => x.User.Id == userId).ToListAsync();
+        return await base.GetAll().Include(x => x.Parameters).Where(x => x.User.Id == userId).ToListAsync();
     }
 
     public async Task<Estimation?> UpdateEstimation(Estimation estimation)
     {
         return await UpdateAsync(estimation);
+    }
+
+    public async Task<IEnumerable<Estimation>> GetAllEstimations()
+    {
+        return await base.GetAll().Include(x=>x.Parameters).ToListAsync();
     }
 }
