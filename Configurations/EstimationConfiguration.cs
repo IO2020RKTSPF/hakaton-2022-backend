@@ -24,6 +24,6 @@ public class EstimationConfiguration : IEntityTypeConfiguration<Estimation>
 
         builder.Property(x => x.Name)
             .HasColumnName("name")
-            .IsRequired();
+            .IsRequired(false);
     }
 }
