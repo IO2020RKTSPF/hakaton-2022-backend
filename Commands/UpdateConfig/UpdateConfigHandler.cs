@@ -34,6 +34,7 @@ public class UpdateConfigHandler : IRequestHandler<UpdateConfigCommand, GetConfi
         config.MinutesPerCodeFamiliarity = request.MinutesPerCodeFamiliarity;
         config.MinutesPerProjectScale = request.MinutesPerProjectScale;
         config.MinutesPerTaskKnowledge = request.MinutesPerTaskKnowledge;
+        config.AiUseOnlyInternalEstimations = request.AiUseOnlyInternalEstimations;
 
         var updatedConfig = await _configRepository.UpdateConfig(config);
         if (updatedConfig is null)

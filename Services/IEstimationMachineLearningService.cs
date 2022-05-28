@@ -5,5 +5,5 @@ namespace hakaton_2022_backend.Services;
 
 public interface IEstimationMachineLearningService
 {
-    public Task<int> Calculate(EstimationModel estimationModel);
+    public Task<int> Calculate(EstimationModel estimationModel, bool useOnlyInternal);
 }

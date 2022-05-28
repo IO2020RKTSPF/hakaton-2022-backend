@@ -43,7 +43,8 @@ public class ConfigController : ControllerBase
             MinutesPerLines = updateConfigDto.MinutesPerLines,
             MinutesPerCodeFamiliarity = updateConfigDto.MinutesPerCodeFamiliarity,
             MinutesPerProjectScale = updateConfigDto.MinutesPerProjectScale,
-            MinutesPerTaskKnowledge = updateConfigDto.MinutesPerTaskKnowledge
+            MinutesPerTaskKnowledge = updateConfigDto.MinutesPerTaskKnowledge,
+            AiUseOnlyInternalEstimations = updateConfigDto.AiUseOnlyInternalEstimations
         });
         return Ok(config);
     }

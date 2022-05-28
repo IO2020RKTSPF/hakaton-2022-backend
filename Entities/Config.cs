@@ -11,4 +11,5 @@ public class Config
     public int MinutesQuality { get; set; }
     public Enterprise Enterprise { get; set; }
     public int EnterpriseId { get; set; }
+    public bool AiUseOnlyInternalEstimations { get; set; }
 }
