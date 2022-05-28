@@ -50,7 +50,14 @@ public class RegisterHandler : IRequestHandler<RegisterCommand, RegisterResponse
         //TODO: SET DEFAULT VALUES
         var config = new Config()
         {
-            Enterprise = enterprise
+            Enterprise = enterprise,
+            MinutesQuality = 30,
+            MinutesPerExperience = 30,
+            MinutesPerLines = 1,
+            MinutesPerCodeFamiliarity = 30,
+            MinutesPerProjectScale = 30,
+            MinutesPerTaskKnowledge = 30,
+            AiUseOnlyInternalEstimations = false
         };
 
         var addedConfig = await _configRepository.AddConfig(config);
