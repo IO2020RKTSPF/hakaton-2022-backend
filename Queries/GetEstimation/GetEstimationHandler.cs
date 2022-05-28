@@ -62,7 +62,7 @@ public class GetEstimationHandler : IRequestHandler<GetEstimationQuery, Estimati
     private async Task<int> CalculateEstimation(Config config, Parameters parameters)
     {
         if (parameters.UseAi)
-            return await _estimationMachineLearningService.Calculate(_mapper.Map<EstimationModel>(parameters));
+            return await _estimationMachineLearningService.Calculate(_mapper.Map<EstimationModel>(parameters), false);
         return (config.MinutesQuality * parameters.DesiredCodeQuality) +
                (config.MinutesPerExperience * (1/parameters.ExperienceLevel)) +
                (config.MinutesPerLines * parameters.LinesOfCode) +

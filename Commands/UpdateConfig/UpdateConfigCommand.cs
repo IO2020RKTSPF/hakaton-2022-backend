@@ -12,4 +12,6 @@ public class UpdateConfigCommand : IRequest<GetConfigDto>
     public int MinutesPerProjectScale { get; set; }
     public int MinutesPerTaskKnowledge { get; set; }
     public int MinutesQuality { get; set; }
+    public bool AiUseOnlyInternalEstimations { get; set; }
+
 }

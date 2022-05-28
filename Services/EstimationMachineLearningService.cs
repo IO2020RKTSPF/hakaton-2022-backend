@@ -17,7 +17,7 @@ public class EstimationMachineLearningService : IEstimationMachineLearningServic
         _estimationRepository = estimationRepository;
         _mapper = mapper;
     }
-    public async Task<int> Calculate(EstimationModel estimationModel)
+    public async Task<int> Calculate(EstimationModel estimationModel, bool useOnlyInternal = true)
     {
         //Create ML Context with seed for repeteable/deterministic results
         MLContext mlContext = new MLContext();

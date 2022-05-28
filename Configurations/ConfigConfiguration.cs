@@ -38,6 +38,10 @@ public class ConfigConfiguration : IEntityTypeConfiguration<Config>
         builder.Property(x => x.MinutesPerTaskKnowledge)
             .HasColumnName("minutesPerTaskKnowledge")
             .IsRequired();
-        
+
+        builder.Property(x => x.AiUseOnlyInternalEstimations)
+            .HasColumnName("aiUseOnlyInternalEstimations")
+            .IsRequired();
+
     }
 }
