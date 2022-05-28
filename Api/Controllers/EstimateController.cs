@@ -71,7 +71,7 @@ public class EstimateController : ControllerBase
         };
 
         var result = await _mediator.Send(request);
-        return _mapper.Map<ICollection<EstimationResultDto>>(result);
+        return _mapper.Map<ICollection<EstimationResultDto>>(result.OrderByDescending(x=>x.Id));
 
     }
 }
