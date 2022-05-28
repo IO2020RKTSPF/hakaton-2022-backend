@@ -52,7 +52,8 @@ public class GetEstimationHandler : IRequestHandler<GetEstimationQuery, Estimati
         {
             Parameters = paramsDb,
             Result = await CalculateEstimation(config, parameters),
-            User = user
+            User = user,
+            Name = request.Name
         };
         var result = await _estimationRepository.AddEstimation(estimation);
         return result;
