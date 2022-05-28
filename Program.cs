@@ -1,9 +1,11 @@
 using System.Text;
-using BitadAPI.Repositories;
-using hakaton_2022_backend.Data;
-using hakaton_2022_backend.Factories;
-using hakaton_2022_backend.Middlewares;
-using hakaton_2022_backend.Services;
+using hakaton_2022_backend.Core.Factories;
+using hakaton_2022_backend.Core.Services;
+using hakaton_2022_backend.Infrastructure.Data;
+using hakaton_2022_backend.Infrastructure.Factories;
+using hakaton_2022_backend.Infrastructure.Middlewares;
+using hakaton_2022_backend.Infrastructure.Repositories;
+using hakaton_2022_backend.Infrastructure.Services;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
