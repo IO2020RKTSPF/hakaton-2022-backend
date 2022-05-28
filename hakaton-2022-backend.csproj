@@ -17,13 +17,12 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.ML" Version="1.7.1" />
+    <PackageReference Include="Microsoft.ML.AutoML" Version="0.19.1" />
+    <PackageReference Include="Microsoft.ML.CpuMath" Version="1.7.1" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.4" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.18.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Services" />
   </ItemGroup>
 
 </Project>

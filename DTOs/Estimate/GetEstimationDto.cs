@@ -5,11 +5,9 @@ namespace hakaton_2022_backend.DTOs.Estimate;
 public class GetEstimationDto
 {
 	[Required]
-	[Range(1,10)]
 	public bool UseAi { get; set; }
 
 	[Required]
-	[Range(1,10)]
 	public int Lines { get; set; }
 
 	[Required]

@@ -3,6 +3,7 @@ using BitadAPI.Repositories;
 using hakaton_2022_backend.Data;
 using hakaton_2022_backend.Factories;
 using hakaton_2022_backend.Middlewares;
+using hakaton_2022_backend.Services;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
@@ -74,6 +75,7 @@ builder.Services.AddScoped<IConfigRepository, ConfigRepository>();
 builder.Services.AddScoped<IParametersRepository, ParametersRepository>();
 builder.Services.AddScoped<IJwtFactory, JwtTokenFactory>();
 builder.Services.AddTransient<ExceptionMiddleware>();
+builder.Services.AddScoped<IEstimationMachineLearningService, EstimationMachineLearningService>();
 
 var app = builder.Build();
 

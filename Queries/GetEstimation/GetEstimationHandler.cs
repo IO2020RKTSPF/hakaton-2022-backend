@@ -1,6 +1,9 @@
+using AutoMapper;
 using BitadAPI.Repositories;
 using hakaton_2022_backend.Entities;
 using hakaton_2022_backend.Exceptions;
+using hakaton_2022_backend.Models;
+using hakaton_2022_backend.Services;
 using MediatR;
 
 namespace hakaton_2022_backend.Queries.GetEstimation;
@@ -11,13 +14,17 @@ public class GetEstimationHandler : IRequestHandler<GetEstimationQuery, Estimati
     private IUserRepository _userRepository;
     private IEstimationRepository _estimationRepository;
     private IParametersRepository _parametersRepository;
+    private readonly IEstimationMachineLearningService _estimationMachineLearningService;
+    private readonly IMapper _mapper;
 
-    public GetEstimationHandler(IConfigRepository configRepository, IUserRepository userRepository, IEstimationRepository estimationRepository, IParametersRepository parametersRepository)
+    public GetEstimationHandler(IConfigRepository configRepository, IUserRepository userRepository, IEstimationRepository estimationRepository, IParametersRepository parametersRepository, IEstimationMachineLearningService estimationMachineLearningService, IMapper mapper)
     {
         _configRepository = configRepository;
         _userRepository = userRepository;
         _estimationRepository = estimationRepository;
         _parametersRepository = parametersRepository;
+        _estimationMachineLearningService = estimationMachineLearningService;
+        _mapper = mapper;
     }
 
     public async Task<Estimation> Handle(GetEstimationQuery request, CancellationToken cancellationToken)
@@ -44,7 +51,7 @@ public class GetEstimationHandler : IRequestHandler<GetEstimationQuery, Estimati
         var estimation = new Estimation()
         {
             Parameters = paramsDb,
-            Result = CalculateEstimation(config, parameters),
+            Result = await CalculateEstimation(config, parameters),
             User = user
         };
         var result = await _estimationRepository.AddEstimation(estimation);
@@ -52,8 +59,10 @@ public class GetEstimationHandler : IRequestHandler<GetEstimationQuery, Estimati
 
     }
 
-    private int CalculateEstimation(Config config, Parameters parameters)
+    private async Task<int> CalculateEstimation(Config config, Parameters parameters)
     {
+        if (parameters.UseAi)
+            return await _estimationMachineLearningService.Calculate(_mapper.Map<EstimationModel>(parameters));
         return (config.MinutesQuality * parameters.DesiredCodeQuality) +
                (config.MinutesPerExperience * parameters.ExperienceLevel) +
                (config.MinutesPerLines * parameters.LinesOfCode) +
