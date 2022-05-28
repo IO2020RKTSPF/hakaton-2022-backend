@@ -4,6 +4,7 @@ namespace hakaton_2022_backend.DTOs.Estimate;
 
 public class GetEstimationDto
 {
+	public string Name { get; set; }
 	[Required]
 	public bool UseAi { get; set; }
 
